@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+  
+  function main() {
+    // Programa 1: Reserva de Quartos no Hotel
+    function reservaHotel() {
+        let valorDiaria = parseFloat(prompt("Qual o valor padrão da diária?"));
+
+        if (isNaN(valorDiaria) || valorDiaria < 0) {
+            console.log("Valor inválido");
+            return;
+        }
+
+        let qtdDias = parseInt(prompt("Quantas diárias serão necessárias?"));
+
+        if (isNaN(qtdDias) || qtdDias < 0 || qtdDias > 30) {
+            console.log("Valor inválido");
+            return;
+        }
+
+        let nomeHospede = prompt("Qual o nome do hóspede?");
+        let valorTotal = valorDiaria * qtdDias;
+
+        console.log(`O valor de ${qtdDias} dias de hospedagem é de R$${valorTotal.toFixed(2)}`);
+        
+        let confirmacao = prompt(`${nomeHospede}, você confirma a hospedagem para ${nomeHospede} por ${qtdDias} dias? (S/N)`);
+
+        if (confirmacao.toUpperCase() === 'S') {
+            console.log(`Reserva efetuada para ${nomeHospede}. O valor total é de R$${valorTotal.toFixed(2)}.`);
+        } else {
+            console.log(`${nomeHospede}, reserva não efetuada.`);
+        }
+    }
+
+    // Programa 2: Cadastro de Hóspedes
+    function cadastroHospedes() {
+        let valorDiaria = parseFloat(prompt("Qual o valor padrão da diária?"));
+        let gratuidades = 0;
+        let meiasHospedagens = 0;
+        let valorTotal = 0;
+
+        while (true) {
+            let nomeHospede = prompt("Qual o nome do hóspede?");
+
+            if (nomeHospede.toUpperCase() === 'PARE') {
+                break;
+            }
+
+            let idadeHospede = parseInt(prompt("Qual a idade do hóspede?"));
+
+            if (idadeHospede < 6) {
+                console.log(`${nomeHospede} possui gratuidade`);
+                gratuidades++;
+            } else if (idadeHospede > 60) {
+                console.log(`${nomeHospede} paga meia`);
+                meiasHospedagens++;
+                valorTotal += valorDiaria / 2;
+            } else {
+                console.log(`${nomeHospede} cadastrado(a) com sucesso.`);
+                valorTotal += valorDiaria;
+            }
+        }
+
+        console.log(`O valor total das hospedagens é: R$${valorTotal.toFixed(2)}; ${gratuidades} gratuidade(s); ${meiasHospedagens} meia(s)`);
+    }
+
+    // Programa 3: Cadastro e Pesquisa de Hóspedes
+    function cadastroPesquisaHospedes() {
+        let hospedes = [];
+
+        while (true) {
+            let opcao = parseInt(prompt("Selecione uma opção: 1. Cadastrar - 2. Pesquisar - 3. Listar - 4. Sair"));
+
+            switch (opcao) {
+                case 1:
+                    let nomeCadastro = prompt("Qual o nome do hóspede?");
+                    if (hospedes.length < 15) {
+                        hospedes.push(nomeCadastro);
+                        console.log(`Hóspede ${nomeCadastro} cadastrado(a) com sucesso!`);
+                    } else {
+                        console.log("Máximo de cadastros atingido.");
+                    }
+                    break;
+
+                case 2:
+                    let nomePesquisa = prompt("Qual o nome do hóspede?");
+                    if (hospedes.includes(nomePesquisa)) {
+                        console.log(`Hóspede ${nomePesquisa} foi encontrado(a)`);
+                    } else {
+                        console.log("Hóspede não encontrado.");
+                    }
+                    break;
+
+                case 3:
+                    console.log("Lista de hóspedes:");
+                    hospedes.forEach(hospede => console.log(hospede));
+                    break;
+
+                case 4:
+                    console.log("Saindo do programa.");
+                    return;
+
+                default:
+                    console.log("Opção inválida.");
+            }
+        }
+    }
+
+    // Programa 4: Custo de Garçons para Evento
+    function custoGarcons() {
+        let horasEvento = parseFloat(prompt("Qual a duração do evento em horas?"));
+        let numGarcons = parseInt(prompt("Quantos garçons serão necessários?"));
+        let custoTotal = 10.5 * horasEvento * numGarcons;
+
+        console.log(`Custo total: R$ ${custoTotal.toFixed(2)}`);
+
+        let confirmacao = prompt("Gostaria de efetuar a reserva? (S/N)");
+
+        if (confirmacao.toUpperCase() === 'S') {
+            console.log("Reserva efetuada com sucesso.");
+        } else {
+            console.log("Reserva não efetuada.");
+        }
+    }
+
+    // Programa 5: Buffet do Hotel
+    function custoBuffet() {
+        const capacidadeMaxima = 350;
+
+        let numConvidados = parseInt(prompt("Qual o número de convidados para o evento?"));
+
+        if (numConvidados > capacidadeMaxima) {
+            console.log("Quantidade de convidados superior à capacidade máxima.");
+            return;
+        }
+
+        let litrosCafe = 0.2 * numConvidados;
+        let litrosAgua = 0.5 * numConvidados;
+        let qtdSalgados = 7 * numConvidados;
+        let custoCafe = litrosCafe * 0.8;
+        let custoAgua = litrosAgua * 0.4;
+        let custoSalgados = (qtdSalgados / 100) * 34;
+        let custoTotal = custoCafe + custoAgua + custoSalgados;
+
+        console.log(`O evento precisará de ${litrosCafe.toFixed(2)} litros de café, ${litrosAgua.toFixed(2)} litros de água, ${qtdSalgados} salgados. O custo total do evento será de R$${custoTotal.toFixed(2)}`);
+
+        let confirmacao = prompt("Gostaria de efetuar a reserva? (S/N)");
+
+        if (confirmacao.toUpperCase() === 'S') {
+            console.log("Reserva efetuada com sucesso.");
+        } else {
+            console.log("Reserva não efetuada.");
+        }
+    }
+
+    // Programa 6: Escolha de Auditório
+    function escolhaAuditório() {
+        const capacidadeLaranja = 150;
+        const cadeirasAdicionaisLaranja = 70;
+        const capacidadeColorado = 350;
+
+        let numConvidados = parseInt(prompt("Qual o número de convidados para o seu evento?"));
+
+        if (numConvidados > capacidadeMaxima) {
+            console.log("Quantidade de convidados superior à capacidade máxima.");
+            return;
+        }
+
+        let litrosCafe = 0.2 * numConvidados;
+        let litrosAgua = 0.5 * numConvidados;
+        let qtdSalgados = 7 * numConvidados;
+        let custoCafe = litrosCafe * 0.8;
+        let custoAgua = litrosAgua * 0.4;
+        let custoSalgados = (qtdSalgados / 100) * 34;
+        let custoTotal = custoCafe + custoAgua + custoSalgados;
+
+        console.log(`O evento precisará de ${litrosCafe.toFixed(2)} litros de café, ${litrosAgua.toFixed(2)} litros de água, ${qtdSalgados} salgados. O custo total do evento será de R$${custoTotal.toFixed(2)}`);
+
+        let confirmacao = prompt("Gostaria de efetuar a reserva? (S/N)");
+
+        if (confirmacao.toUpperCase() === 'S') {
+            console.log("Reserva efetuada com sucesso.");
+        } else {
+            console.log("Reserva não efetuada.");
+        }
+    }
+
+    // Chamar os programas
+    reservaHotel();
+    cadastroHospedes();
+    cadastroPesquisaHospedes();
+    custoGarcons();
+    custoBuffet();
+    escolhaAuditório();
+}
+
+main();
+
+    </script>
+</body>
+</html>
